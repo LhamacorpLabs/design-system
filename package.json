@@ -1,0 +1,40 @@
+{
+	"name": "@lhamacorplabs/design-tokens",
+	"version": "0.1.0",
+	"description": "COSMIC design system tokens (colors, type, spacing, radii, shadows, light/dark theming) shared across Lhamacorp frontends.",
+	"license": "UNLICENSED",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./css": "./src/css/tokens.css",
+		"./css/tokens.css": "./src/css/tokens.css",
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"src/css"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.2"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/LhamacorpLabs/design-system.git"
+	}
+}
