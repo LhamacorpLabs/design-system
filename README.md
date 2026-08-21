@@ -34,10 +34,24 @@ npm install @lhamacorplabs/design-tokens
 
 ```css
 /* your global stylesheet */
-@import '@lhamacorplabs/design-tokens/css';
+@import '@lhamacorplabs/design-tokens/css/tokens.css';
 ```
 
-or link it directly if your build doesn't resolve package CSS imports:
+```ts
+// or as a JS side-effect import (Vite/webpack/etc. extract it to a real stylesheet)
+import '@lhamacorplabs/design-tokens/css/tokens.css';
+```
+
+Prefer the `.css`-suffixed path (`/css/tokens.css`) over the shorter
+`/css` alias in a TypeScript project: TS's `declare module '*.css'`
+ambient type (from `vite/client` or similar) only matches specifiers
+that literally end in `.css`, so `import '@lhamacorplabs/design-tokens/css'`
+(no extension) fails type-checking with "Cannot find module" even
+though it resolves and works fine at runtime. The extension-less `/css`
+export still exists for non-TS tooling that only cares about runtime
+resolution.
+
+Or link it directly if your build doesn't resolve package CSS imports:
 
 ```html
 <link rel="stylesheet" href="/node_modules/@lhamacorplabs/design-tokens/src/css/tokens.css" />
