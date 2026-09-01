@@ -175,7 +175,29 @@ npm run typecheck
 
 ## Versioning
 
-This is v0.1.0 — pre-1.0, breaking changes may land without a major
-bump until this stabilizes across more than one consuming app. Once
-chat-client and at least one other frontend are both on it, this
-should move to semver-proper releases.
+**v1.0.0** is tagged and frozen: the COSMIC tokens described in this
+README (monospace type, pastel gradient, floating panels) exactly as
+they exist at that tag. Consumers who want stability should pin to it
+explicitly rather than floating on the default branch:
+
+```bash
+npm install github:LhamacorpLabs/design-system#v1.0.0
+```
+
+Work past that tag on this branch (and eventually `main`) is heading
+toward **v2** — a new dark, card-heavy visual direction (icon-rail
+navigation, translucent surfaces, pricing/model-card style components)
+tracked as `2.0.0-dev` until the token values are finalized and it's
+tagged `v2.0.0` in turn. A draft starting point lives at
+[`src/css/v2/tokens.css`](./src/css/v2/tokens.css) (currently just a
+copy of the v1 tokens — the actual new values are still being
+designed) and is exported as `@lhamacorplabs/design-tokens/v2/css`.
+
+**Important:** installing this package via the unpinned
+`github:LhamacorpLabs/design-system` form (no `#ref`) resolves to
+whatever the default branch's HEAD is at install time — that's how
+`chat-client` currently depends on it. Once v2 development lands on
+`main`, that means an unpinned consumer would silently pick up v2 on
+its next `npm install`. Any app that wants to stay on v1 needs to pin
+`#v1.0.0` explicitly; any app opting into v2 early can pin this branch
+or, once cut, `#v2.0.0`.
