@@ -1,83 +1,75 @@
 /**
- * DRAFT v2 tokens — starting point only, not yet redesigned.
+ * DRAFT v2 tokens — first pass, not yet locked in.
  *
- * This is currently a straight copy of the v1.0.0 COSMIC tokens
- * (../tokens.css). It exists so v2 development has a file to land in
- * without touching the frozen v1 tokens. The actual v2 direction — a
- * darker, card-heavy visual language (icon-rail navigation,
- * translucent/glass surfaces, pricing- and model-card style
- * components) — has not been designed into these values yet.
+ * A new dark, card-heavy visual direction: near-black chrome, a slim
+ * icon-only nav rail, and translucent "glass" surfaces meant to sit
+ * over an app-supplied photographic/atmospheric backdrop (this file
+ * does not embed a specific image — see --bg-image below).
  *
- * Do not treat this file as stable. See "Versioning" in the README.
- */
-
-/**
- * COSMIC design tokens — light + dark theme, keyed off a `data-theme`
- * attribute on <html>. Extracted from LhamacorpLabs/chat-client.
+ * New token groups beyond v1: glass surface tier (--glass-*), nav
+ * rail sizing (--rail-*), badge/tag (--badge-*), and inline code
+ * block (--code-*). Everything else keeps v1's names so existing
+ * markup ports over by swapping the import and picking up new values.
  *
- * This file is CSS-only: colors, type, radii, shadows, spacing, and
- * motion. It intentionally ships no resets, no component classes, and
- * no backward-compat aliases — consuming apps build their own
- * components against these variables.
- *
- * Font: this file only sets the `--font-mono` variable. Load the
- * actual JetBrains Mono font yourself, e.g. via Google Fonts:
- *
- *   <link rel="preconnect" href="https://fonts.googleapis.com" />
- *   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
- *   <link
- *     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
- *     rel="stylesheet"
- *   />
+ * Not yet ported: the JS/TS mirror (tokens.ts/theme.ts) still only
+ * reflects v1 — this is CSS-only for now.
  */
 
 :root {
-	color-scheme: light;
+	color-scheme: dark;
 	--font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+	--font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
 
-	--bg-gradient: linear-gradient(135deg, #f7dce8 0%, #e7d8f1 30%, #d7dff5 65%, #cfe9ee 100%);
-	--surface: #f5f6fb;
-	--surface-hover: #eceef6;
-	--surface-alt: #e2e5f0;
-	--panel-bg: #eceef5;
+	/* Canvas: the outermost background. --bg-image is an empty hook —
+	   consuming apps layer their own photo/gradient art behind the UI
+	   chrome via `background-image: var(--bg-image, none)`; --bg-gradient
+	   is the fallback for apps that don't supply one. */
+	--bg-image: none;
+	--bg-gradient: linear-gradient(160deg, #0d0d10 0%, #101014 50%, #0a0a0c 100%);
 
-	--text-primary: #262a3d;
-	--text-secondary: #666b84;
-	--text-muted: #9599ac;
+	--surface: #151518;
+	--surface-hover: #1c1c20;
+	--surface-alt: #212126;
+	--panel-bg: #141417;
 
-	--accent: #2c2f45;
-	--accent-hover: #3d4160;
-	--accent-contrast: #f7f7fb;
-	--accent-subtle: rgba(44, 47, 69, 0.08);
-	--accent-shadow: rgba(44, 47, 69, 0.12);
+	--text-primary: #f2f2f5;
+	--text-secondary: #a8a8b3;
+	--text-muted: #6f6f7a;
 
-	--border: #d9dce7;
-	--border-hover: #c2c6d8;
-	--border-focus: #3b6fed;
-	--focus-ring: rgba(59, 111, 237, 0.2);
-	--input-bg: #ffffff;
+	--accent: #7c6fee;
+	--accent-hover: #9086f5;
+	--accent-contrast: #ffffff;
+	--accent-subtle: rgba(124, 111, 238, 0.14);
+	--accent-shadow: rgba(124, 111, 238, 0.25);
+	--accent-glow: 0 0 0 3px rgba(124, 111, 238, 0.35), 0 0 24px rgba(124, 111, 238, 0.25);
 
-	--success-bg: rgba(43, 148, 105, 0.1);
-	--success-text: #237a56;
-	--success-border: rgba(43, 148, 105, 0.28);
-	--error-bg: rgba(214, 79, 79, 0.1);
-	--error-text: #b23b3b;
-	--error-border: rgba(214, 79, 79, 0.28);
-	--danger: #c94747;
-	--danger-hover: #b23b3b;
-	--warning-text: #9a6b1f;
-	--warning-bg: rgba(184, 134, 44, 0.12);
-	--warning-border: rgba(184, 134, 44, 0.3);
+	--border: rgba(255, 255, 255, 0.08);
+	--border-hover: rgba(255, 255, 255, 0.14);
+	--border-focus: #7c6fee;
+	--focus-ring: rgba(124, 111, 238, 0.3);
+	--input-bg: rgba(255, 255, 255, 0.04);
 
-	--shadow-sm: 0 1px 2px rgba(35, 27, 58, 0.05);
-	--shadow-md: 0 10px 28px rgba(35, 27, 58, 0.08);
-	--shadow-lg: 0 20px 56px rgba(35, 27, 58, 0.16);
+	--success-bg: rgba(52, 211, 153, 0.12);
+	--success-text: #4ade80;
+	--success-border: rgba(52, 211, 153, 0.28);
+	--error-bg: rgba(248, 113, 113, 0.12);
+	--error-text: #f87171;
+	--error-border: rgba(248, 113, 113, 0.28);
+	--danger: #f87171;
+	--danger-hover: #fca5a5;
+	--warning-text: #f0b429;
+	--warning-bg: rgba(240, 180, 41, 0.14);
+	--warning-border: rgba(240, 180, 41, 0.3);
+
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+	--shadow-md: 0 2px 8px rgba(0, 0, 0, 0.25);
+	--shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.3);
 
 	--radius-sm: 8px;
 	--radius-md: 12px;
 	--radius-lg: 18px;
 	--radius-pill: 999px;
-	--gap: 20px;
+	--gap: 12px;
 
 	/* Spacing scale (4px base unit) */
 	--space-1: 0.25rem;
@@ -108,47 +100,88 @@
 	--duration-slower: 0.3s;
 	--ease-standard: ease;
 	--ease-out: ease-out;
+
+	/* --- New: glass surface tier. Translucent panels meant to float
+	   over --bg-image/--bg-gradient rather than sit on a flat --panel-bg. --- */
+	--glass-bg: rgba(255, 255, 255, 0.05);
+	--glass-bg-hover: rgba(255, 255, 255, 0.08);
+	--glass-border: rgba(255, 255, 255, 0.1);
+	--glass-blur: 20px;
+	--glass-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+	/* --- New: icon-only nav rail. Deliberately theme-invariant: this is
+	   fixed chrome (like Slack/Linear/Discord's rail), not a themed
+	   surface, so its tokens are declared once here on the base :root
+	   and are NOT re-overridden under [data-theme='light'] below.
+	   Flat and opaque by design — no --glass-* blur/translucency. --- */
+	--rail-width: 56px;
+	--rail-bg: #000000;
+	--rail-icon-size: 36px;
+	--rail-icon-gap: 6px;
+	--rail-icon-radius: var(--radius-pill);
+	--rail-icon-color: var(--text-secondary);
+	--rail-icon-color-active: #000000;
+	--rail-icon-bg-active: #ffffff;
+	--rail-icon-bg-hover: rgba(255, 255, 255, 0.08);
+
+	/* --- New: badge/tag pill (e.g. "Sparse") --- */
+	--badge-bg: rgba(255, 255, 255, 0.08);
+	--badge-text: var(--text-secondary);
+	--badge-radius: var(--radius-pill);
+	--badge-font-size: var(--font-xs);
+	--badge-padding: 0.25rem 0.625rem;
+
+	/* --- New: inline code / "copy & run" block --- */
+	--code-bg: #0a0a0c;
+	--code-text: #c8c8d0;
+	--code-line-number: rgba(255, 255, 255, 0.25);
+	--code-keyword: #a78bfa;
+	--code-radius: var(--radius-md);
 }
 
-/* Dark theme */
-:root[data-theme='dark'] {
-	color-scheme: dark;
+/* Light theme — v2 is designed dark-first (the reference is a dark
+   dashboard); this is a best-effort light counterpart using the same
+   structure, not something validated against a reference image. */
+:root[data-theme='light'] {
+	color-scheme: light;
 
-	--bg-gradient: linear-gradient(135deg, #1c1730 0%, #171b30 30%, #12162a 65%, #0f1a1e 100%);
-	--surface: #1b1d2b;
-	--surface-hover: #23263a;
-	--surface-alt: #292c44;
-	--panel-bg: #191b28;
+	--bg-gradient: linear-gradient(160deg, #f5f5f7 0%, #eeeef1 50%, #e8e8ec 100%);
+	--surface: #ffffff;
+	--surface-hover: #f2f2f5;
+	--surface-alt: #e8e8ec;
+	--panel-bg: #ffffff;
 
-	--text-primary: #e9eaf3;
-	--text-secondary: #a3a7c0;
-	--text-muted: #6c7091;
+	--text-primary: #1a1a1e;
+	--text-secondary: #55555f;
+	--text-muted: #8a8a94;
 
-	--accent: #e9eaf3;
-	--accent-hover: #ffffff;
-	--accent-contrast: #171928;
-	--accent-subtle: rgba(233, 234, 243, 0.08);
-	--accent-shadow: rgba(233, 234, 243, 0.12);
+	--accent: #5b4fd6;
+	--accent-hover: #4a3fc4;
+	--accent-contrast: #ffffff;
+	--accent-subtle: rgba(91, 79, 214, 0.1);
+	--accent-shadow: rgba(91, 79, 214, 0.18);
+	--accent-glow: 0 0 0 3px rgba(91, 79, 214, 0.22), 0 0 24px rgba(91, 79, 214, 0.15);
 
-	--border: #2e3149;
-	--border-hover: #3d4160;
-	--border-focus: #7c98ff;
-	--focus-ring: rgba(124, 152, 255, 0.28);
-	--input-bg: #14151f;
+	--border: rgba(0, 0, 0, 0.08);
+	--border-hover: rgba(0, 0, 0, 0.14);
+	--border-focus: #5b4fd6;
+	--focus-ring: rgba(91, 79, 214, 0.2);
+	--input-bg: #ffffff;
 
-	--success-bg: rgba(52, 211, 153, 0.12);
-	--success-text: #4ade80;
-	--success-border: rgba(52, 211, 153, 0.28);
-	--error-bg: rgba(248, 113, 113, 0.12);
-	--error-text: #f87171;
-	--error-border: rgba(248, 113, 113, 0.28);
-	--danger: #f87171;
-	--danger-hover: #fca5a5;
-	--warning-text: #f0b429;
-	--warning-bg: rgba(240, 180, 41, 0.14);
-	--warning-border: rgba(240, 180, 41, 0.3);
+	--shadow-sm: 0 1px 2px rgba(20, 20, 30, 0.05);
+	--shadow-md: 0 2px 6px rgba(20, 20, 30, 0.07);
+	--shadow-lg: 0 4px 12px rgba(20, 20, 30, 0.1);
 
-	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-	--shadow-md: 0 10px 28px rgba(0, 0, 0, 0.35);
-	--shadow-lg: 0 20px 56px rgba(0, 0, 0, 0.5);
+	--glass-bg: rgba(255, 255, 255, 0.6);
+	--glass-bg-hover: rgba(255, 255, 255, 0.75);
+	--glass-border: rgba(0, 0, 0, 0.08);
+	--glass-shadow: 0 1px 2px rgba(20, 20, 30, 0.08);
+
+	/* --rail-* intentionally not redeclared here — the rail stays
+	   pitch black in both themes, see the base :root block above. */
+
+	--badge-bg: rgba(0, 0, 0, 0.06);
+
+	--code-bg: #1a1a1e;
+	--code-text: #d4d4d8;
 }

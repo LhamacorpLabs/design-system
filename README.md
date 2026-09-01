@@ -187,11 +187,31 @@ npm install github:LhamacorpLabs/design-system#v1.0.0
 Work past that tag on this branch (and eventually `main`) is heading
 toward **v2** — a new dark, card-heavy visual direction (icon-rail
 navigation, translucent surfaces, pricing/model-card style components)
-tracked as `2.0.0-dev` until the token values are finalized and it's
-tagged `v2.0.0` in turn. A draft starting point lives at
-[`src/css/v2/tokens.css`](./src/css/v2/tokens.css) (currently just a
-copy of the v1 tokens — the actual new values are still being
-designed) and is exported as `@lhamacorplabs/design-tokens/v2/css`.
+tracked as `2.0.0-dev` until it's validated against real UI and tagged
+`v2.0.0` in turn. A first pass at real values lives at
+[`src/css/v2/tokens.css`](./src/css/v2/tokens.css), exported as
+`@lhamacorplabs/design-tokens/v2/css`. Beyond re-coloring the v1 token
+names for a dark, near-black chrome, it adds four new groups:
+
+- `--glass-*` — translucent panel surfaces (bg/border/blur/shadow) meant to float over an app-supplied photo or gradient backdrop (`--bg-image`, an empty hook apps fill in) rather than sit on a flat `--panel-bg`.
+- `--rail-*` — sizing and color for a slim icon-only nav rail (width, icon size/gap/radius, active vs. hover states). The rail is flat, opaque, and pitch black (`#000000`) in **both** themes — it's fixed chrome, not a themed surface, so these tokens live only on the base `:root` and are not redeclared under `[data-theme='light']`.
+- `--badge-*` — a small pill/tag primitive (e.g. a "Sparse" label on a card).
+- `--code-*` — an inline code / "copy & run" snippet block (background, text, line-number, keyword-highlight colors).
+
+Two more adjustments from reviewing against the reference UI: `--gap`
+(the floating-panel inset) tightened from v1's `20px` to `12px` — the
+reference is a dense, content-forward layout, not one with generous
+breathing room — and `--shadow-sm/-md/-lg` plus `--glass-shadow` are
+now much subtler (e.g. `--glass-shadow` went from a heavy `0 8px 32px`
+drop shadow to a near-flat `0 1px 3px`) since cards in the reference
+read as flat, translucent surfaces distinguished by their border and
+blur, not by elevation shadow.
+
+v2 is dark-first: `:root` holds the dark values directly and
+`[data-theme='light']` is the override (v1 was the reverse). The
+light values are a best-effort counterpart, not validated against a
+reference design. The JS/TS mirror (`tokens.ts`/`theme.ts`) has not
+been ported to v2 yet — this is CSS-only for now.
 
 **Important:** installing this package via the unpinned
 `github:LhamacorpLabs/design-system` form (no `#ref`) resolves to
